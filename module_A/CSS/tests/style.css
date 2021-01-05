@@ -1,0 +1,54 @@
+.table tr:nth-of-type(2n){
+    background-color: rgb(146, 252, 194);
+    font-weight: bold;
+    font-style: italic;
+}
+
+.text:nth-of-type(2) {
+    background-color: bisque;
+    text-transform: uppercase;
+}
+
+.client-text {
+    font-weight: bold;
+    color: blue;
+}
+
+.internet-text {
+    text-transform: uppercase;
+}
+
+.browser-text {
+    font-style: italic;
+    color: orange;
+}
+
+.server-text {
+    color: red;
+}
+
+body {
+    color: rgb(247, 130, 109);
+}
+p {
+    color: inherit;
+}
+span {
+    color: initial;
+}
+
+.wrap {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    background-color: rgb(235, 194, 61);
+}
+    
+.box {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(240, 56, 10);
+}    
