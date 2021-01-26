@@ -1,0 +1,8 @@
+#telegramm token
+module_B/secret/secret.py
+
+#pycache
+__pycache__
+
+#vs code files
+.vscode
