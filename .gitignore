@@ -6,3 +6,6 @@ __pycache__
 
 #vs code files
 .vscode
+
+#test files and folders
+test*
