@@ -1,0 +1,38 @@
+body {
+    display: grid;
+    justify-content: center;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    width: 620px;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 290px;
+    margin: 10px;
+    justify-content: center;
+}
+
+.card-image {
+    display: block;
+    width: 290px;
+    height: 218px;
+}
+
+.form {
+    margin: 20px auto;
+    min-width: 600px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.form-item {
+    min-width: 200px;
+    width: 45%;
+    text-align: center;
+}
