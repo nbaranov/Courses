@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 520px;
+    max-width: 800px;
+    width: 50%;
+    margin: 10px;
+}
+
+.inputs {
+    display: inline-flex;
+    min-width: 410px;
+    width: 95%;
+}
+
+label {
+    width: 110px;
+}
+
+input {
+    width: 100%;
+    text-align: center;
+    border-radius: 24px;
+    background-color: aliceblue;
+}
+
+#page {
+    margin-bottom: 10px;
+}
+
+button {
+    width: 30%;
+    font-size: large;
+    min-width: 240px;
+    margin: 10px;
+    border-radius: 30px;
+    background-color: whitesmoke;
+}
+
+.result {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: center;
+    text-align: center;
+}
+
+.card {
+    width: 45%;
+    min-width: 300px;
+    margin: 10px;
+}
+
+.card-image {
+    width: 90%;
+}
