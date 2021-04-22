@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+h1 {
+    text-align: center;
+    width: 100%;
+}
+
+.btn {
+    display: inline-flex;
+    width: 400px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn_text {
+    display: flex;
+    font-size: 24px;
+    margin: auto;
+}
+
+.btn_icon {
+    margin: auto 5px;
+    width: 42px;
+    height: 42px;
+}
