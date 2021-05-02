@@ -28,6 +28,7 @@ btnSend.addEventListener('click', () => {
     sendMessage(message)
 });
 
+
 // Функции отправки сообщений и добавления сообщений в окно чата. 
 function readAndClearInput() {
     const message = input.value;
@@ -43,6 +44,7 @@ function sendMessage(message) {
     }
 }
 
+
 function writeToScreenSend(message) {
     let pre = document.createElement("p");
     pre.className = "send message";
@@ -50,6 +52,7 @@ function writeToScreenSend(message) {
     output.appendChild(pre);
     output.scrollTop = output.scrollHeight
 }
+
 
 function writeToScreenRecieve(message) {
     let pre = document.createElement("p");
