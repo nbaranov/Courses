@@ -13,7 +13,7 @@ btnNode.addEventListener('click', () => {
     if ((height >= 200 & width >= 200) & (height <= 500 & width <= 500) & (height != NaN & width != NaN)) {
         getImageURL(width, height, addTag);
     } else {
-        resultNode.innerHTML = '<p>Число вне диапазона 100 - 300</p>'
+        resultNode.innerHTML = '<p>Число вне диапазона 200 - 500</p>'
     }
 })
 
@@ -30,7 +30,6 @@ function getImageURL(width, height, callback) {
         .then((url) => { callback(`<img src="${url}">`) })
         .catch(() => { callback(`<p>Не удалось загрузить картинку</p>`) })
 }
-
 
 
 function addTag(tag) {
