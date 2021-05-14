@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-%fn*i(0d(72#icq0_jlk+__aoq$k6z3*6l3c82_(5f12^e1veq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.31.62', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -37,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # подключаем ещё приложения
+    'django.contrib.sites',
+    'django.contrib.flatpages',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware', 
 ]
 
 ROOT_URLCONF = 'first_project.urls'
@@ -54,8 +64,8 @@ ROOT_URLCONF = 'first_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
