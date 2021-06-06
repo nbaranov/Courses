@@ -3,9 +3,21 @@
 <head>
 <title>{{ flatpage.title }}</title>
 </head>
-<body>
-<h3> default templates </h3>
+<body style='display: flex; align-items: center; flex-direction: column;'>
+{% block nav %}
+<nav>
+    <a href="/">Home'як</a> |
+    <a href="/page1">Page 1</a> |
+    <a href="/page2">Page 2</a> |
+    <a href="/page3">Page 3</a> |
+    <a href="/contacts">Contacts</a> |
+    <a href="/about">About us</a>
+</nav>
+{% endblock nav %}
 
+{% block content %}
+<p>It's content block from default templates</p>
 {{ flatpage.content }}
+{% endblock content %}
 </body>
 </html>

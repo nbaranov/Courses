@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-9yhh22!w5!deii!+r*)z*&$c5)m(99ils^h#731^yn)n3ts+#8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.31.62']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.31.62', '192.168.1.14']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'fpages',
 ]
 
 SITE_ID = 1
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'fpages')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
