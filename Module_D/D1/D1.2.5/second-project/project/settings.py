@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware', 
+    
 ]
 
 ROOT_URLCONF = 'project.urls'
