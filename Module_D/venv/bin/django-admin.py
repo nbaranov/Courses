@@ -1,4 +1,4 @@
-#!/home/nick/Documents/SkillFactory/Module_D/D2/venv/bin/python3
+#!/home/nick/Documents/SkillFactory/Module_D/venv/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
