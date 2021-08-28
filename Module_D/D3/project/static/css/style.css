@@ -56,7 +56,7 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  background-color: #fff;
+  background-color: #feffe9;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -276,6 +276,7 @@ svg {
 table {
   caption-side: bottom;
   border-collapse: collapse;
+  width: 100%;
 }
 
 caption {
@@ -290,12 +291,20 @@ th {
   text-align: -webkit-match-parent;
 }
 
+tr {
+  display: flex;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
+}
+
 thead,
 tbody,
 tfoot,
-tr,
 td,
 th {
+  width: 100%;
+  display: flow-root;
   border-color: inherit;
   border-style: solid;
   border-width: 0;
@@ -7417,7 +7426,7 @@ textarea.form-control-lg {
 }
 
 .bg-dark {
-  background-color: #212529 !important;
+  background-color: #051b5ccc !important;
 }
 
 .bg-body {

@@ -17,32 +17,31 @@ Products
     </h4>
     <hr>
     {% if products %} <!-- Если есть товары, то выводим таблицу с ними -->
-        <table style="display: flex;
-                      justify-content: center;">
+        <table>
             <tr>
-                <td>
+                <th>
                     Название
-                </td>
-                <td>
+                </th>
+                <th>
                     Описание
-                </td>
-                <td>
+                </th>
+                <th>
                     Категория
-                </td>
-                <td>
+                </th>
+                <th>
                     Цена
-                </td>
-                <td>
+                </th>
+                <th>
                     Количество
-                </td>
+                </th>
             </tr>
             {% for product in products %} <!-- Для каждого товара будете генерироваться новая строчка, т.е. новый html код. При этом сам цикл работет точно также, как и в python. product — переменная цикла, т.е. наш товар взятый из общего списка -->
             <tr>
                 <td>
                     {{ product.name|multiply:1 }} <!-- не забываем что переменные в шаблоне ничем не отличаются от переменных в python. Здесь также можно получать доступ к полям класса. Например здесь мы выводим имя, в следующем столбце описание, и т.д.  -->
                 </td>
-                <td>
-                    {{ product.description|truncatewords:5 }}
+                <td title="{{product.description}}">
+                    {{ product.description|truncatechars:20 }}
                 </td>
                 <td>
                     {{ product.category.name }}
