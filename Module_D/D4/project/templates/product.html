@@ -1,12 +1,19 @@
+
 {% extends 'flatpages/default.html' %} 
  
 <!-- Название у нас будет proudcts -->
 {% block title %}
-Product detail
+{{ product.name }}
 {% endblock title %}
  
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
 
-<h2> {{ product_info }} </h2>
+<h3> {{ product }} </h3>
+<span> Наименование: {{product.name}} </span> <br>
+<span> Описание: {{product.description}} </span> <br>
+<span> Цена: {{product.price}} </span> <br>
+<span> На складе: {{product.quantity}} </span> <br>
+<a href="{{ request.META.HTTP_REFERER }}">Назад</a>
+
 {% endblock content %}
