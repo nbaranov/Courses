@@ -10843,8 +10843,22 @@ textarea.form-control-lg {
   }
 }
 
-  .paginator {
+.paginator {
     font: inherit;
     font-weight: bold;
     padding: 0.3em;
   }
+
+.many-quantity {
+    color: #047942;
+    font-weight: bolder;
+  }
+
+.normal-quantity {
+  color: inherit;
+}
+
+.low-quantity {
+  color: #bb2d3b;
+  font-weight: bolder;
+}

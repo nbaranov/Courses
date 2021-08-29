@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView # импортируем класс, который говорит нам о том, что в этом представлении мы будем выводить список объектов из БД
 
-from datetime import datetime
 
 from .models import Product
 
@@ -17,7 +16,6 @@ class ProductsList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["time_now"] = datetime.utcnow()
         context["your_ads"] = None
         return context
         

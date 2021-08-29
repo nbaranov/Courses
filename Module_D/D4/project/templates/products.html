@@ -5,12 +5,11 @@
 
 <!-- Название у нас будет proudcts -->
 {% block title %}
-Products
+Module D4
 {% endblock title %}
  
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
-    <h2> {{ time_now|date:'D | d M Y | H:m'}} </h2>
     <h1>Все товары</h1>
     <h4> 
         {{ your_ads|default_if_none:"Здесь могла быть ваша реклама"}} 
@@ -32,7 +31,7 @@ Products
                     Цена
                 </th>
                 <th>
-                    Количество
+                    На складе
                 </th>
             </tr>
             {% for product in products %} <!-- Для каждого товара будете генерироваться новая строчка, т.е. новый html код. При этом сам цикл работет точно также, как и в python. product — переменная цикла, т.е. наш товар взятый из общего списка -->
@@ -49,9 +48,13 @@ Products
                 <td>
                     {{ product.price }}
                 </td>
-                <td>
-                    {{ product.quantity }}
-                </td>
+                {% if product.quantity > 50 %}
+                    <td class="many-quantity" title="Более 50">Много</td>
+                {% elif product.quantity > 10 %}
+                    <td class="normal-quantity" title="Больше 10">Достаточно</td>
+                {% else %}
+                    <td class="low-quantity" title="Меньше 10">Мало</td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>
@@ -83,5 +86,6 @@ Products
     {% endif %}
 
 {% endif %}
-
+    <h4> {% now "D d.m.Y H:i" %} </h4>
+    
 {% endblock content %}
