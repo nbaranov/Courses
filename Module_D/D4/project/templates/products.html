@@ -11,6 +11,8 @@ Module D4
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
     <h1>Все товары</h1>
+    <h4> {% now "D d.m.Y H:i" %} </h4>
+
     <h4> 
         {{ your_ads|default_if_none:"Здесь могла быть ваша реклама"}} 
     </h4>
@@ -86,6 +88,5 @@ Module D4
     {% endif %}
 
 {% endif %}
-    <h4> {% now "D d.m.Y H:i" %} </h4>
     
 {% endblock content %}
