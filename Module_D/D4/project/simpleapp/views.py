@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView # импортируем �
 
 
 from .models import Product
+from .filters import ProductFilter
 
 
 #Создаем свои вьюшки
@@ -17,6 +18,7 @@ class ProductsList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["your_ads"] = None
+        context["filter"] = ProductFilter(self.request.GET, queryset=self.get_queryset())
         return context
         
  

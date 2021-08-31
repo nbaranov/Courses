@@ -5,4 +5,8 @@ from .models import Product
 class ProductFilter(FilterSet):
     class Meta:
         model = Product
-        field = ('name', 'category', 'price')
+        exclude = ['quantity']
+        # interface = ('relay.Node',)
+        fields = {'name' : ['contains'], 
+                #   'category' : [], 
+                  'price' : ['lt']}
