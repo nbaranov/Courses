@@ -27,15 +27,3 @@ class ProductFilter(FilterSet):
           exclude = ['quantity']
           fields = ['name', 'category', 'price_gt', 'price_lt']
           
-
-
-
-# Пример из курса    
-# class ProductFilter(FilterSet):
-#     class Meta:
-#         model = Product
-#         exclude = ['quantity']
-#         # fields = {'name' : ['icontains'], 
-#         #         #   'category' : [], 
-#         #           'price' : ['lt']}
-#         fields = ['name', 'category', 'price']

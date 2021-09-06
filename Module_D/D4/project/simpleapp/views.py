@@ -14,12 +14,22 @@ class ProductsList(ListView):
     context_object_name = 'products'
     ordering = ['-price']
     paginate_by = 2
+    
+    
+    def get_filter(self):
+        return ProductFilter(self.request.GET, queryset=super().get_queryset())
+    
+    
+    def get_queryset(self):
+        return self.get_filter().qs
+        
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["your_ads"] = None
-        context["filter"] = ProductFilter(self.request.GET, queryset=self.get_queryset())
-        return context
+    def get_context_data(self, *args, **kwargs):
+        return {
+            **super().get_context_data(*args, **kwargs),
+            "your_ads" : None,
+            "filter" : self.get_filter(),
+        }
         
  
 class ProductDetail(DetailView):
