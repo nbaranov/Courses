@@ -20,7 +20,7 @@ class Post(models.Model):
     type = models.CharField(max_length=2, choices=TYPE, default=post)
     create_time = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category, through="PostCategory")
-    header = models.CharField(max_length=124, 
+    header = models.CharField(max_length=256, 
                               default='Заголовок отсутвует')
     text = models.TextField(default='Текст отсутствует')
     rating = models.FloatField(default=0.0)
@@ -32,14 +32,18 @@ class Post(models.Model):
         self.rating -= 1   
     
     def preview(self):
-        return f'{self.text[:124]} ...'
+        return f'{self.text[:256]} ...'
     
-    # def __repr__(self):
-    #     return f'{self.preview} \n {self.create_time} \t {self.author}'
+    def __str__(self):
+        return f'{self.preview()}'
 
 class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    
+    def  __str__ (self):
+        return f'{self.category}'
+        
 
 
 class Comment(models.Model):
@@ -54,3 +58,6 @@ class Comment(models.Model):
         
     def dislike(self):
         self.rating -= 1  
+        
+    def __str__(self):
+        return f'{self.text}'
