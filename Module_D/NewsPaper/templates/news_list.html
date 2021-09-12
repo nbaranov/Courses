@@ -16,7 +16,7 @@ News list
     {% for news in news_list %}
         <b><a href={{news.id}}> {{ news.header|censor }}</a></b> 
         {{ news.create_time|date:'d.M.Y  H:m' }} <br>
-        {{ news.text|censor|truncatechars:50}} <hr>
+        {{ news.text|censor|truncatewords:18}} <hr>
     {% endfor %}
 {% else %}
     <h2>Новостей пока нет</h2>
