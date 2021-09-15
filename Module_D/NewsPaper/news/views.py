@@ -39,11 +39,11 @@ class NewsListSearch(ListView):
     
     
     def get_filter(self):
-        return NewsFilter(self.request.GET, queryset=super().get_queryset()).qs
+        return NewsFilter(self.request.GET, queryset=super().get_queryset())
 
 
     def get_queryset(self):
-        return self.get_filter()
+        return self.get_filter().qs
 
     
     def get_context_data(self, *args, **kwargs):
