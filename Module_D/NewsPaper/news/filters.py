@@ -12,22 +12,29 @@ class NewsFilter (FilterSet):
         lookup_expr="gte",
         label="Дата от",
         )
+
     date.field.error_messages = {'invalid' : 'Введите дату в формате ДД.ММ.ГГГГ. Например 31.12.2020'}
     date.field.widget.attrs = {'placeholder' : 'ДД.ММ.ГГГГ'}
+        
+    header = django_filters.CharFilter(
+        field_name="header",
+        lookup_expr="icontains",
+        label="Заголовок"
+        )
     
-    header = django_filters.CharFilter(field_name="header",
-                                       lookup_expr="icontains",
-                                       label="Заголовок")
+    authorName = django_filters.TypedChoiceFilter(
+        field_name='author',
+        label='Автор',
+        )
+    choices_list = [('' , '---Любой автор---')]
+    authors = list(Author.objects.all().values_list("user_id", "user__username"))
+    choices_list.extend(authors)
     
-    autorName = django_filters.TypedChoiceFilter(field_name='author',
-                                                 label='Автор',)
-    
-    print(Author.objects.all().values_list('user__username'))
-    autorName.queryset = Author.objects.all().values_list('user__username')
+    authorName.field.choices = choices_list
 
-    
+        
     class Meta:
         model = Post
         exclude = ['type', 'category', 'text', 'rating']
-        fields = ['date', 'header', 'autorName']
+        fields = ['date', 'header', 'authorName']
         
