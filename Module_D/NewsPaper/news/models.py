@@ -33,7 +33,7 @@ class Post(models.Model):
         self.rating -= 1   
     
     def preview(self):
-        return f'{self.header} {self.text[:256]} ...'
+        return f'{self.text[:256]} ...'
     
     def __str__(self):
         return f'{self.preview()}'
