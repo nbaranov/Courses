@@ -25,7 +25,7 @@ News list with search
             <b>Рейтинг: {{news.rating}}  Автор: {{ news.author.user.username }} </b> <hr>
         {% endfor %}
     {% else %}
-        <h2>Новостей пока нет</h2>
+        <h3>По заданным фильтрам новостей не нашлось.</h3>
     {% endif %}
 
     {% comment %} ссылки пагинатора {% endcomment %}
