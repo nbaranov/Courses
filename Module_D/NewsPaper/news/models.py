@@ -19,7 +19,7 @@ class Post(models.Model):
     author = models.ForeignKey(Author,
                                on_delete=models.CASCADE)
     type = models.CharField(max_length=2, choices=TYPE, default=post)
-    create_time = models.DateTimeField(default=datetime.now())
+    create_time = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category, through="PostCategory")
     header = models.CharField(max_length=256, 
                               default='Заголовок отсутвует')
@@ -33,7 +33,7 @@ class Post(models.Model):
         self.rating -= 1   
     
     def preview(self):
-        return f'{self.text[:256]} ...'
+        return f'{self.text[:256]} ... '
     
     def __str__(self):
         return f'{self.preview()}'
