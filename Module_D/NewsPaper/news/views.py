@@ -35,7 +35,7 @@ class NewsListSearch(ListView):
     template_name = 'news_search.html'
     context_object_name = 'news_search'
     queryset = Post.objects.all().order_by('id').reverse()
-    paginate_by = 5
+    paginate_by = 10
     
     
     def get_filter(self):
