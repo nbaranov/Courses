@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ flatpage.title }}</title>
+    </head>
+    <header>
+        |<a href='/about'>About Us</a>
+        |<a href='/contacts'>Contacts</a>
+        |<a href='/task1.3.2'>task1.3.2</a>
+        |<a href='/task1.3.3'>task1.3.3</a>
+        |<a href='/task1.3.4'>task1.3.4</a>  
+        <hr>
+        {% block header %} {% endblock header %}
+    </header>
+    
+    <body>
+    {% block content %} {{flatpage.content}} {% endblock content %}
+
+    
+    </body>
+</html>
