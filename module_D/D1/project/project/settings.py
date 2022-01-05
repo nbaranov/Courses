@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     #connected apps in unit D1.3
     'django.contrib.sites',
     'django.contrib.flatpages',
+    #connected apps in unit D1.4
+    'fpages',
 ]
 
 SITE_ID = 1
