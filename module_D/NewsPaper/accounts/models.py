@@ -23,3 +23,6 @@ class Author(models.Model):
 
         self.rating = new_rating
         self.save()
+
+    def __str__(self):
+        return self.user.username

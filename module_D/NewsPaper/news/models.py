@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Post(models.Model):
     post = "PS"
@@ -31,8 +34,8 @@ class Post(models.Model):
     def preview(self):
         return f'{self.text[:124]} ...'
 
-    # def __repr__(self):
-    #     return f'{self.preview} \n {self.create_time} \t {self.author}'
+    def __str__(self):
+        return f'{self.author} \t {self.preview()}'
 
 
 class PostCategory(models.Model):
