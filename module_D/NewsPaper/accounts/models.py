@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from news.models import Post
-from news.models import Comment
+from news.models import Post, Comment
 
 class Author(models.Model):
     user = models.OneToOneField(User,

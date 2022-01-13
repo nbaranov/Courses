@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from accounts.models import Author
 
 
 class Category(models.Model):
@@ -14,7 +13,7 @@ class Post(models.Model):
         (post, "Статья"),
         (news, "Новость"),
     ]
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey('accounts.Author', on_delete=models.CASCADE)
     type = models.CharField(max_length=2, choices=TYPE, default=post)
     create_time = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category, through="PostCategory")
