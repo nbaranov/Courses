@@ -9,5 +9,13 @@ All News
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
 <h1>Последние новости</h1>
-{{ news }}
+{% for post in news  %}
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h3> <a href="/news/{{ post.id }}"> {{ post.header }}</a> </h3>
+            <p> {{ post.preview }} </p>
+        </div>
+        <hr>
+    </div>
+{% endfor %}
 {% endblock content %}

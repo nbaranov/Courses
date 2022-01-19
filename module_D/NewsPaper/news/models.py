@@ -17,11 +17,17 @@ class Post(models.Model):
         (news, "Новость"),
     ]
     author = models.ForeignKey('accounts.Author', on_delete=models.CASCADE)
-    type = models.CharField(max_length=2, choices=TYPE, default=post)
+    type = models.CharField(
+        max_length=2, 
+        choices=TYPE, 
+        default=post
+    )
     create_time = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category, through="PostCategory")
-    header = models.CharField(max_length=124,
-                              default='Заголовок отсутвует')
+    header = models.CharField(
+        max_length=124,
+        default='Заголовок отсутвует'
+    )
     text = models.TextField(default='Текст отсутствует')
     rating = models.FloatField(default=0.0)
 
@@ -31,11 +37,12 @@ class Post(models.Model):
     def dislike(self):
         self.rating -= 1
 
+    @property
     def preview(self):
-        return f'{self.text[:124]} ...'
+        return f'{self.text[:56]} ...'
 
     def __str__(self):
-        return f'{self.author} \t {self.preview()}'
+        return f'{self.author} \t {self.preview}'
 
 
 class PostCategory(models.Model):
