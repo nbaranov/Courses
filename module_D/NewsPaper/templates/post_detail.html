@@ -8,10 +8,15 @@
 
 
 {% block content %}
-<h1> {{ post.header }} </h1>
-<p> {{ post.text }} </p>
-<br>
-<span> Рейтинг: {{ post.rating }} </span> <br>
-<a href="{{request.META.HTTP_REFERER}}">Назад к сиску новостей</a>
-<hr>
+<div class="col-lg-12 text-center">
+    <h1> {{ post.header }} </h1>
+    <p> {{ post.text }} </p>
+    <br>
+    <span> {{ post.create_time|date:'d.m.Y H:i' }} </span>
+    <br>
+    <span> Автор: {{post.author}} Рейтинг: {{ post.rating }} </span>
+    <br>
+    <a href="{{request.META.HTTP_REFERER}}">Назад к сиску новостей</a>
+    <hr>
+</div>
 {% endblock content %}
