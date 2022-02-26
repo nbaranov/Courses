@@ -9,12 +9,12 @@ class ProductFilter(FilterSet):
         lookup_expr='icontains',
         label='Имя содержит'
     )
-    quantity_min = filters.NumberFilter(
+    price_min = filters.NumberFilter(
         field_name='price',
         lookup_expr='gt',
         label='Цена от',
     )
-    quantity_max = filters.NumberFilter(
+    price_max = filters.NumberFilter(
         field_name='price',
         lookup_expr='lt',
         label='Цена до',
