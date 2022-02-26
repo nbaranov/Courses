@@ -12,29 +12,33 @@ Products
 {% block content %}
 <h3> Сегодня: {{ time_now|date:'l d E Y' }}. Время: {{ time_now|date:'H:i T' }} </h3>
 <h4> {{ ads|default_if_none:'Здесь могла бы быть ваша реклама' }} </h4>
+
+<!-- Перед таблицей добавим форму для поиска -->
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому -->
+    <input type="submit" value="Найти">
+</form>
+
 <h1>Список товаров: </h1>
     <table>
         <tr>
             <th>Наименование</th>
-            <th>Описание</th>
             <th>Категория</th>
             <th>Цена</th>
             <th>На складе</th>
         </tr>
 {% if products %}
-    {% for product in products %}
-        <tr>
-            <td>{{ product.name|multiply:2 }}</td>
-            <td>{{ product.description|truncatewords:4 }}</td>
-            <td>{{ product.category.name }}</td>
+    {% for product in filter.qs %} <!-- поменяем products на filter.qs, т.к. теперь мы забираем уже отобранную по каким-то параметрам информацию -->        <tr>
+            <td>{{ product.name|title }}</td>
+            <td>{{ product.category.name|title }}</td>
             <td>{{ product.price }}</td>
             <td>
                 {% if product.quantity < 50 %}
-                    <span style="color: red; ">Мало</span>
+                    <span style="color: red;" title="Меньше 50">Мало</span>
                 {% elif product.quantity <= 100 %}
-                    <span style="color: blue; ">Много</span>
+                    <span style="color: blue;" title="Больше 50">Много</span>
                 {% else %}
-                <span style="color: green; ">Очень много</span>
+                <span style="color: green;" title="Больше 100">Очень много</span>
                 {% endif %}
             </td>
         </tr>    
@@ -43,5 +47,30 @@ Products
     </table>
 {% else %}
     <h1>Товаров нет</h1>
+{% endif %}
+
+<!-- Проверяем что поддерживается постраничный вывод -->
+{% if is_paginated %}
+ 
+    <!-- Если доступна предыдущая страница, то даём ссылку на неё и самую первую страницу -->
+    {% if page_obj.has_previous %}
+        <a href="?page=1">Первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}"><--</a>
+    {% endif %}
+ 
+    <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a>{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+ 
+    <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">--></a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+    {% endif %}
 {% endif %}
 {% endblock content %}
