@@ -11,6 +11,7 @@ class NewsListView(ListView):
     template_name = 'news_list.html'
     context_object_name = 'news'
     queryset = Post.objects.order_by('-id')
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
