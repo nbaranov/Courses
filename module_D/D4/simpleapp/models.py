@@ -10,6 +10,9 @@ class Product(models.Model):
  
     def __str__(self):
         return f'{self.name} {self.quantity}'
+    
+    def get_absolute_url(self): # добавим абсолютный путь, чтобы после создания нас перебрасывало на страницу с товаром
+        return f'/products/{self.id}' 
  
  
 # модель категории с одним полем имени
