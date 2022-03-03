@@ -10,7 +10,7 @@ from datetime import datetime
 # Create your views here.
 class NewsListView(ListView):
     model = Post
-    template_name = 'news_list.html'
+    template_name = 'news/news_list.html'
     context_object_name = 'news'
     queryset = Post.objects.order_by('-id')
     paginate_by = 5
@@ -24,17 +24,17 @@ class NewsListView(ListView):
 
 class NewsDetail(DetailView):
     model = Post
-    template_name = 'post_detail.html'
+    template_name = 'news/post_detail.html'
     context_object_name = 'post'
 
 # дженерик для создания объекта. Надо указать только имя шаблона и класс формы который мы написали в прошлом юните. Остальное он сделает за вас
 class PostCreateView(CreateView):
-    template_name = 'post_create.html'
+    template_name = 'news/post_create.html'
     form_class = PostForm
 
 # дженерик для редактирования объекта
 class PostUpdateView(UpdateView):
-    template_name = 'post_create.html'
+    template_name = 'news/post_create.html'
     form_class = PostForm
  
     # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы собираемся редактировать
@@ -45,14 +45,14 @@ class PostUpdateView(UpdateView):
  
 # дженерик для удаления товара
 class PostDeleteView(DeleteView):
-    template_name = 'post_delete.html'
+    template_name = 'news/post_delete.html'
     queryset = Post.objects.all()
     success_url = '/'
 
 
 class NewsSearchView(ListView):
     model = Post
-    template_name = 'search_news.html'
+    template_name = 'news/search_news.html'
     context_object_name = 'post'
 
     def get_context_data(self, **kwargs):
