@@ -1,0 +1,10 @@
+{% extends 'default.html' %}
+
+{% block content %}
+  <h2>Регистрация</h2>
+  <form class='col-form' method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Создать</button>
+  </form>
+{% endblock %}

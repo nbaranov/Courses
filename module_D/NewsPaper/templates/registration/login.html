@@ -1,0 +1,17 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'default.html' %}
+
+
+{% block title %}
+Вход
+{% endblock title %}
+
+
+{% block content %}
+<h2>Войти</h2>
+<form class='col-form' method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Войти</button>
+</form>
+{% endblock content %}

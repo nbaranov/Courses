@@ -26,9 +26,12 @@ All News
             <h3> <a href="/news/{{ post.id }}"> {{ post.header|censor }}</a> </h3>
             <p> {{ post.text|truncatechars:50|censor }} </p>
             <span> {{ post.create_time|date:'d.m.Y H:i' }} </span>
+            <br>
+            {% if post.author.user.id == user.id  %}
             <a href="{% url 'post_update' post.id %}">[_редактировать_ ]</a>
             <a href="{% url 'post_delete' post.id %}">[_удалить_новость_ ]</a>            
             <br>
+            {% endif %}
             <span> Автор: {{post.author}} Рейтинг: {{ post.rating }} </span>
         </div>
         <hr>

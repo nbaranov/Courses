@@ -1,5 +1,10 @@
 #from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+
+from accounts.models import Author
+
 
 from .models import Post
 from .filters import SearchNewsFilter
@@ -28,14 +33,20 @@ class NewsDetail(DetailView):
     context_object_name = 'post'
 
 # дженерик для создания объекта. Надо указать только имя шаблона и класс формы который мы написали в прошлом юните. Остальное он сделает за вас
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'news/post_create.html'
     form_class = PostForm
+    success_message = 'Пост успешно создан'
+
+    def form_valid(self, form):
+        form.instance.author = Author.objects.get(user_id = self.request.user)   
+        return super().form_valid(form)
 
 # дженерик для редактирования объекта
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'news/post_create.html'
     form_class = PostForm
+    success_message = 'Пост успешно отредактирован'
  
     # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы собираемся редактировать
     def get_object(self, **kwargs):
@@ -43,11 +54,12 @@ class PostUpdateView(UpdateView):
         return Post.objects.get(pk=pk)
 
  
-# дженерик для удаления товара
-class PostDeleteView(DeleteView):
+# дженерик для удаления 
+class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = 'news/post_delete.html'
     queryset = Post.objects.all()
     success_url = '/'
+    success_message = 'Пост успешно удален'
 
 
 class NewsSearchView(ListView):
