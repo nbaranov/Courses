@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-from accounts.models import Author
 
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -14,12 +16,18 @@ class Post(models.Model):
         (post, "Статья"),
         (news, "Новость"),
     ]
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    type = models.CharField(max_length=2, choices=TYPE, default=post)
+    author = models.ForeignKey('accounts.Author', on_delete=models.CASCADE)
+    type = models.CharField(
+        max_length=2, 
+        choices=TYPE, 
+        default=post
+    )
     create_time = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category, through="PostCategory")
-    header = models.CharField(max_length=124,
-                              default='Заголовок отсутвует')
+    header = models.CharField(
+        max_length=124,
+        default='Заголовок отсутвует'
+    )
     text = models.TextField(default='Текст отсутствует')
     rating = models.FloatField(default=0.0)
 
@@ -29,11 +37,12 @@ class Post(models.Model):
     def dislike(self):
         self.rating -= 1
 
+    @property
     def preview(self):
-        return f'{self.text[:124]} ...'
+        return f'{self.text[:56]} ...'
 
-    # def __repr__(self):
-    #     return f'{self.preview} \n {self.create_time} \t {self.author}'
+    def __str__(self):
+        return f'{self.author} \t {self.preview}'
 
 
 class PostCategory(models.Model):
