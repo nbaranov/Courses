@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "NewsPaper"
+name = "d3"
 version = "0.1.0"
-description = "SkillFactory study project"
+description = ""
 authors = ["Nikita Baranov <nbaranov.vrn@gmail.com>"]
 
 [tool.poetry.dependencies]

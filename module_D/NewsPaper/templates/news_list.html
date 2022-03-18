@@ -11,7 +11,7 @@ All News
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
 <h3> Сегодня: {{ time_now|date:'l d E Y' }}. Время: {{ time_now|date:'H:i T' }} </h3>
-<h3>Всего новостей: {{ news|length }} </h3>
+
 <h1>Последние новости:</h1>
 
 {% for post in news  %}
@@ -19,6 +19,9 @@ All News
         <div class="col-lg-12 text-center">
             <h3> <a href="/news/{{ post.id }}"> {{ post.header|censor }}</a> </h3>
             <p> {{ post.text|truncatechars:50|censor }} </p>
+            <a href="{% url 'post_update' post.id %}">[_редактировать_ ]</a>
+            <a href="{% url 'post_delete' post.id %}">[_удалить_новость_ ]</a>            
+            <br>
             <span> {{ post.create_time|date:'d.m.Y H:i' }} </span>
             <br>
             <span> Автор: {{post.author}} Рейтинг: {{ post.rating }} </span>
@@ -26,4 +29,31 @@ All News
         <hr>
     </div>
 {% endfor %}
+
+<!-- Проверяем что поддерживается постраничный вывод -->
+{% if is_paginated %}
+ 
+    <!-- Если доступна предыдущая страница, то даём ссылку на неё и самую первую страницу -->
+    {% if page_obj.has_previous %}
+        <a href="?page=1">Первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}"><--</a>
+    {% endif %}
+ 
+    <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a>{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+ 
+    <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">--></a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+    {% endif %}
+{% endif %}
+
+
 {% endblock content %}

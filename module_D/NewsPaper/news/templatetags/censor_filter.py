@@ -88,11 +88,11 @@ CENSOR_WORDS = (
       "хуепромышленник", "хуерик", "хуерыло", "хуесос", "хуесоска", "хуета", 
       "хуетень", "хуею", "хуи", "хуй", "хуйком", "хуйло", "хуйня", "хуйрик", 
       "хуище", "хуля", "хую", "хуюл", "хуя", "хуяк", "хуякать", "хуякнуть", 
-      "хуяра", "хуясе", "хуячить", "шараёбиться"
+      "хуяра", "хуясе", "хуячить", 'хуйнёй', "шараёбиться"
 )
 
 PUNCTUATIONS_1 = ('.', ',', '\'', '"', '!', '?', ':', ';')
-PUNCTUATIONS_2 = ('!?', '?!', '!!', '??', '..')
+PUNCTUATIONS_2 = ('!?', '?!', '!!', '??', '..', '".')
 PUNCTUATIONS_3 = ('...', '!!!', '???')
 
 def censor(word, start_sym=0, last_sym=0):
@@ -127,10 +127,10 @@ def censor_filter(string):
             if words[i][0] in PUNCTUATIONS_1 and words[i][-1] in PUNCTUATIONS_1:
                 if words[i][1:-1].lower() in CENSOR_WORDS:
                     words[i] = censor(words[i], start_sym=1 , last_sym= 1)
-                elif words[i][-1] in PUNCTUATIONS_1:
-                    if words[i][:-1].lower() in CENSOR_WORDS:
-                        word = censor(word, last_sym=1)
-                
+            if words[i][-1] in PUNCTUATIONS_1:
+                if words[i][:-1].lower() in CENSOR_WORDS:
+                    words[i] = censor(words[i], last_sym=1)
+            
     else: Raise(ValueError(f'{type(string)} не строка'))
     return ' '.join(words)
             
