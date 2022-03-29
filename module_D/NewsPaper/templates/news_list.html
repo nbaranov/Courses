@@ -11,7 +11,6 @@ All News
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
 <h3> Сегодня: {{ time_now|date:'l d E Y' }}. Время: {{ time_now|date:'H:i T' }} </h3>
-
 <h1>Последние новости:</h1>
 
 {% for post in news  %}
