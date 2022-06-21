@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falatpage</title>
-</head>
-<body>
-    <h1> {{ flatpage.title }} </h1>
-    <hr>
+{% extends 'flatpages/default.html' %}
+
+{% block header %}
+О нас
+{% endblock header %}
+
+{% block content %}
     <h3> {{ flatpage.content }} </h3>
-</body>
-</html>
+    <hr>
+    <p>А это информация из шаблона страницы</p>
+{% endblock content %}
