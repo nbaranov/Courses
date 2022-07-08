@@ -1,9 +1,10 @@
 <!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
 {% extends 'default.html' %}
 
+{% load censor_filter %}
 
 {% block title %}
- {{ post.header }}
+ {{ post.header|censor }}
 {% endblock title %}
 
 
@@ -14,8 +15,8 @@
     {% endfor %}
 {% endif %}
 <div class="col-lg-12 text-center">
-    <h1> {{ post.header }} </h1>
-    <pre> {{ post.text }} </pre>
+    <h1> {{ post.header|censor }} </h1>
+    <pre> {{ post.text|censor }} </pre>
     {% comment %} <a href="{% url 'post_update' post.id %}">[_редактировать_ ]</a>
     <a href="{% url 'post_delete' post.id %}">[_удалить_новость_ ]</a>             {% endcomment %}
     <br>

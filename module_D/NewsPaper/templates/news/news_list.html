@@ -1,6 +1,8 @@
 <!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
 {% extends 'default.html' %}
 
+{% load censor_filter %}
+
 <!-- Название у нас будет proudcts -->
 {% block title %}
 All News
@@ -20,8 +22,8 @@ All News
 {% for post in news  %}
     <div class="row">
         <div class="col-lg-12 text-center">
-            <h3> <a href="/news/{{ post.id }}"> {{ post.header}}</a> </h3>
-            <p> {{ post.text|truncatewords:20 }} </p>
+            <h3> <a href="/news/{{ post.id }}"> {{ post.header|censor}}</a> </h3>
+            <p> {{ post.text|truncatechars:50|censor }} </p>
             {% if post.author.user.id == user.id  %}
             {% comment %} <a href="{% url 'post_update' post.id %}">[_редактировать_ ]</a>
             <a href="{% url 'post_delete' post.id %}">[_удалить_новость_ ]</a>             {% endcomment %}
