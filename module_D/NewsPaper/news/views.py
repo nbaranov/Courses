@@ -8,6 +8,7 @@ class NewsListView(ListView):
     model = Post
     template_name = 'news/news_list.html'
     context_object_name = 'news'
+    queryset = Post.objects.order_by('-id')
 
 
 class NewsDetail(DetailView):
