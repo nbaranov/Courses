@@ -1,19 +1,24 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView # импортируем класс получения деталей объекта
 from .models import Product
-from datetime import datetime 
  
+from django.views import View # импортируем простую вьюшку
+from django.core.paginator import Paginator # импортируем класс, позволяющий удобно осуществлять постраничный вывод
+ 
+from .models import Product
+ 
+
 class ProductList(ListView):
-    model = Product  
+    model = Product
     template_name = 'products.html'
     context_object_name = 'products'
-    queryset = Product.objects.order_by('-id')
+    ordering = ['-price']
+    paginate_by = 1 
 
-    # метод get_context_data нужен нам для того, чтобы мы могли передать переменные в шаблон. В возвращаемом словаре context будут храниться все переменные. Ключи этого словари и есть переменные, к которым мы сможем потом обратиться через шаблон
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['time_now'] = datetime.now() # добавим переменную текущей даты time_now
-        context['ads1'] = None # добавим ещё одну пустую переменную, чтобы на её примере посмотреть работу другого фильтра
+        context['ads1'] = None 
         return context
  
  

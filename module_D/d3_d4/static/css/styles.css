@@ -4802,8 +4802,9 @@ textarea.form-control-lg {
 
 .pagination {
   display: flex;
-  padding-left: 0;
+  margin: 5px 5px;
   list-style: none;
+  font-size: 110%;
 }
 
 .page-link {
