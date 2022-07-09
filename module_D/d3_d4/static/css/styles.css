@@ -4802,7 +4802,7 @@ textarea.form-control-lg {
 
 .pagination {
   display: flex;
-  margin: 5px 5px;
+  padding: 5px 5px;
   list-style: none;
   font-size: 110%;
 }

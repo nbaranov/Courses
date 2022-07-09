@@ -1,12 +1,8 @@
-from django.shortcuts import render
+#from django.shortcuts import render
 from django.views.generic import ListView, DetailView # импортируем класс получения деталей объекта
+
 from .models import Product
- 
-from django.views import View # импортируем простую вьюшку
-from django.core.paginator import Paginator # импортируем класс, позволяющий удобно осуществлять постраничный вывод
- 
-from .models import Product
- 
+from .filters import ProductFilter # импортируем недавно написанный фильтр 
 
 class ProductList(ListView):
     model = Product
@@ -15,10 +11,10 @@ class ProductList(ListView):
     ordering = ['-price']
     paginate_by = 1 
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['ads1'] = None 
+        context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset()) # вписываем наш фильтр в контекст
         return context
  
  
