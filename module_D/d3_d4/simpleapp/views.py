@@ -1,5 +1,5 @@
 #from django.shortcuts import render
-from django.views.generic import ListView, DetailView # импортируем класс получения деталей объекта
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView # импортируем класс получения деталей объекта
 
 from .models import Product, Category
 from .filters import ProductFilter # импортируем недавно написанный фильтр 
@@ -7,7 +7,7 @@ from .forms import ProductForm
 
 class ProductList(ListView):
     model = Product
-    template_name = 'products.html'
+    template_name = 'product/product_list.html'
     context_object_name = 'products'
     ordering = ['-price']
     paginate_by = 1 
@@ -32,5 +32,28 @@ class ProductList(ListView):
 # создаём представление, в котором будут детали конкретного отдельного товара
 class ProductDetail(DetailView):
     model = Product # модель всё та же, но мы хотим получать детали конкретно отдельного товара
-    template_name = 'product.html' # название шаблона будет product.html
+    template_name = 'product/product_detail.html' # название шаблона будет product.html
     context_object_name = 'product' # название объекта
+
+
+# дженерик для создания объекта. Надо указать только имя шаблона и класс формы который мы написали в прошлом юните. Остальное он сделает за вас
+class ProductCreateView(CreateView):
+    template_name = 'product/product_create.html'
+    form_class = ProductForm
+
+
+# дженерик для редактирования объекта
+class ProductUpdateView(UpdateView):
+    template_name = 'product/product_create.html'
+    form_class = ProductForm
+ 
+    # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы собираемся редактировать
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        return Product.objects.get(pk=id)
+
+# дженерик для удаления товара
+class ProductDeleteView(DeleteView):
+    template_name = 'product/product_delete.html'
+    queryset = Product.objects.all()
+    success_url = '/products/'
