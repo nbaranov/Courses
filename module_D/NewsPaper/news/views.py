@@ -1,4 +1,4 @@
-#from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Post
@@ -38,7 +38,7 @@ class PostCreateView(CreateView):
     form_class = PostForm
 
 # дженерик для редактирования объекта
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'news/create_post.html'
     form_class = PostForm
  
