@@ -8,6 +8,7 @@ authors = ["Nikita Baranov <nbaranov.vrn@gmail.com>"]
 python = "^3.10"
 Django = "^4.0.5"
 django-filter = "^22.1"
+django-allauth = "^0.51.0"
 
 [tool.poetry.dev-dependencies]
 
