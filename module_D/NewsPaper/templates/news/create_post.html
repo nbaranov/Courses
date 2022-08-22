@@ -8,11 +8,16 @@
 
 
 {% block content %}
+    {% if is_not_author %}
+    <p> Только авторы имеют право писать новости на сайте </p>
+     <a href="{% url 'become_author' %}"><input type="button" value="Стать Автором"</a> 
+    {% else %}
     <form class="col-form"  method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Сохранить">
     </form>
+    {% endif %}
     <hr>
     <a href="{% url 'news_list' %}">Назад к сиску новостей</a>
 {% endblock content %}

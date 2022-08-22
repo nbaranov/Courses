@@ -19,6 +19,12 @@
         <h3> {{ message }} </h3>
         {% endfor %}
     {% endif %}
+    {% if is_not_author %}
+    <p> Чтобы иметь возможность писать статьи на сайте, нужно: </p>
+      <a href="{% url 'become_author' %}"><input type="button" value="Стать Автором"</a> 
+    {% else %}
+    <p> Вы уже автор и можете писать свои статьи на сайте.</p
+    {% endif %}
     <br>
     <a href="{%url 'account_change_password'%}">Изменить пароль</a>
     <hr>

@@ -45,7 +45,7 @@ class Post(models.Model):
         return f'{self.author} \t {self.preview}'
     
     def get_absolute_url(self): 
-        return f'/news/{self.id}' 
+        return f'{self.id}' 
 
 
 class PostCategory(models.Model):

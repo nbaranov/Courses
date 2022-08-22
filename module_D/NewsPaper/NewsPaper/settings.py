@@ -151,3 +151,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Login pages
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
+
+ACCOUNT_FORMS = {'signup': 'accounts.forms.BasicSignupForm'}
