@@ -26,7 +26,6 @@ class NewsListView(ListView):
         context['form'] = PostForm
         return context    
 
-
 class NewsDetail(DetailView):
     model = Post
     template_name = 'news/post_detail.html'
