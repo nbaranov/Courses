@@ -1,6 +1,6 @@
 #from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
 from accounts.models import Author
@@ -48,7 +48,8 @@ class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 # дженерик для редактирования объекта
-class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    permission_required = ('news.change_post')
     template_name = 'news/create_post.html'
     form_class = PostForm
     success_message = 'Пост успешно отредактирован'
@@ -57,14 +58,23 @@ class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_object(self, **kwargs):
         pk = self.kwargs.get('pk')
         return Post.objects.get(pk=pk)
+    
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author.user == self.request.user
 
  
 # дженерик для удаления 
-class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin, SuccessMessageMixin, DeleteView):
+    permission_required = ('news.delete_post')
     template_name = 'news/delete_post.html'
     queryset = Post.objects.all()
     success_url = '/'
     success_message = 'Пост успешно удален'
+    
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author.user == self.request.user
 
 
 class NewsSearchView(ListView):
