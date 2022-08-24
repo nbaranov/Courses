@@ -263,6 +263,7 @@ pre {
   margin-bottom: 1rem;
   overflow: auto;
   font-size: 0.875em;
+  white-space: pre-wrap; 
 }
 pre code {
   font-size: inherit;

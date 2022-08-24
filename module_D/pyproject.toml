@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "module_d"
+version = "0.0.0"
+description = "Venv for module D"
+authors = ["Nikita Baranov <nbaranov.vrn@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.0.5"
+django-filter = "^22.1"
+django-allauth = "^0.51.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

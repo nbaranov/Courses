@@ -4,8 +4,11 @@ from django.contrib.auth.models import User
 from news.models import Post, Comment
 
 class Author(models.Model):
-    user = models.OneToOneField(User,
-                                on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
+
     rating = models.FloatField(default=0.0)
 
     def update_rating(self):
@@ -26,3 +29,6 @@ class Author(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def get_absolute_url(self):
+        return '/'

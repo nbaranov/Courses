@@ -1,0 +1,51 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'flatpages/default.html' %} 
+ 
+<!-- Название у нас будет proudcts -->
+{% block title %}
+{{ product.name }}
+{% endblock title %}
+ 
+<!-- В контенте на странице мы выводим сам товар, айди которого было передано в адрес -->
+{% block content %}
+
+<table>
+    <thead>
+        <th>
+            Name
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Quantity
+        </th>
+    </thead>
+    <tr>
+        <td>
+            {{ product.name|title }}
+        </td>
+        <td>
+            {{ product.category.name|title }}
+        </td>
+        <td>
+            {{ product.price }}
+        </td>
+        <td>
+            {{ product.quantity }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan=4> {{product.description}} </td>
+    </tr>
+</table>
+<div style="flex-direction: line;">
+<a href="{% url 'product_update' product.id %}"><input type="button" value="Редактировать"></a>
+<a href="{% url 'product_delete' product.id %}"><input type="button" value="Удалить"></a>
+<a href={{ request.META.HTTP_REFERER }}><input type="button" value="Вернуться"></a>
+</div>
+
+{% endblock content %}

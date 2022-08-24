@@ -1,0 +1,78 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'flatpages/default.html' %} 
+ 
+{% load custom_filters %}
+
+<!-- Название у нас будет proudcts -->
+{% block title %}
+Products
+{% endblock title %}
+ 
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<h3> Today:{% now "j.m.y  G:i" %}</h3> 
+<h5> {{ ads1|default_if_none:"Здесь могла бы быть ваша реклама" }} </h5> 
+{% if products %}
+    <h1>Все товары</h1>
+
+    <form method="GET">
+        {{ filter.form }} <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому -->
+        <input type="submit" value="Найти">
+    </form>
+
+    <table>
+        <tr>
+            <th> Название</th>
+            <th> Описание </th>
+            <th> Категория </th>
+            <th> Цена </th>
+            <th> Количество </th>
+            <th> Общая стоимость </th>
+        </tr>
+    {% for product in  filter.qs  %}
+        <tr>
+            <td><a href="{% url 'product_detail' product.id%}"> {{ product.name }} </a>
+                <a href="{% url 'product_update' product.id %}">( Редактировать, </a> <!-- добавим ссылку на редактирование товара--> 
+                <a href="{% url 'product_delete' product.id %}"> Удалить )</a> <!-- добавим ссылку на удаление товара-->
+            </td>
+            <td> {{ product.description|truncatewords:4 }} </td>
+            <td> {{ product.category.name}} </td>
+            <td> {{ product.price}} </td>
+            <td> {{ product.quantity}} </td>
+            <td> {{ product.price|multiply:product.quantity}} </td>
+        </tr>
+    {% endfor %}
+    </table> 
+{% else %}
+    <h1> Товаров нет </h1>
+{% endif %}
+
+<!-- Проверяем что поддерживается постраничный вывод -->
+<div  class="pagination">
+{% if is_paginated %}
+ 
+    <!-- Если доступна предыдущая страница, то даём ссылку на неё и самую первую страницу -->
+    {% if page_obj.has_previous %}
+        <a class="pagination" href="?page=1">First</a>
+        <a class="pagination" href="?page={{ page_obj.previous_page_number }}"> <<< </a>
+    {% endif %}
+ 
+    <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a class="pagination">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="pagination" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+ 
+    <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
+    {% if page_obj.has_next %}
+        <a class="pagination" href="?page={{ page_obj.next_page_number }}">>>></a>
+        <a class="pagination" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+ 
+{% endif %}
+</div>
+
+{% endblock content %}

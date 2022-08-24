@@ -1,0 +1,35 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'default.html' %}
+
+{% block title %}
+Редактировать профиль
+{% endblock title %}
+
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <h2>Редактировать профиль</h2>
+    <form class="col-form" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Сохранить">
+    </form>
+    {% if messages %}
+        {% for message in messages %}
+        <h3> {{ message }} </h3>
+        {% endfor %}
+    {% endif %}
+    {% if is_not_author %}
+    <p> Чтобы иметь возможность писать статьи на сайте, нужно: </p>
+      <a href="{% url 'become_author' %}"><input type="button" value="Стать Автором"</a> 
+    {% else %}
+    <p> Вы уже автор и можете писать свои статьи на сайте.</p
+    {% endif %}
+    <br>
+    <a href="{%url 'account_change_password'%}">Изменить пароль</a>
+    <hr>
+    <a href="{% url 'news_list' %}">Назад к сиску новостей</a>
+    {% else %}
+
+    {% endif %}
+{% endblock content %}

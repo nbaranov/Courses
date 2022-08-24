@@ -39,13 +39,13 @@ class Post(models.Model):
 
     @property
     def preview(self):
-        return f'{self.text[:128]} ...'
+        return f'{self.text[:124]} ...'
 
     def __str__(self):
         return f'{self.author} \t {self.preview}'
     
     def get_absolute_url(self): 
-        return f'/news/{self.id}' 
+        return f'/{self.id}' 
 
 
 class PostCategory(models.Model):

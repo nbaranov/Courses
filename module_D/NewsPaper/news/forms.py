@@ -1,14 +1,12 @@
 from django import forms
+from django.contrib.auth.models import User
 
 from .models import Post, Category
 from accounts.models import Author
 
 
+
 class PostForm(forms.ModelForm):
-    author = forms.ModelChoiceField(
-        queryset=Author.objects.all(),
-        label='Автор:',
-    )
     type = forms.ChoiceField(
         choices=Post.TYPE,
         label='Тип записи:'
@@ -25,10 +23,7 @@ class PostForm(forms.ModelForm):
         widget= forms.Textarea()
     )
 
-    
-
-    
 
     class Meta:
         model = Post
-        fields = ['author', 'type', 'category', 'header', 'text']
+        fields = ['type', 'category', 'header', 'text']
