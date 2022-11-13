@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label id="client_name">Имя клиента</label> <input type="text" name="client_name"> <br>
+        <label id="date"> Дата записи</label> <input type="date" name="date"> <br>
+        <label id="message"> Описание проблемы</label> <input type="text" name="message"> <br>
+
+        <input type="submit" value="Сохранить">
+    </form>
+</body>
+</html>
