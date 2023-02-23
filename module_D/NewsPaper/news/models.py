@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
+    subscribers = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
         return self.name
@@ -23,7 +24,7 @@ class Post(models.Model):
         default=post
     )
     create_time = models.DateTimeField(auto_now_add=True)
-    category = models.ManyToManyField(Category, through="PostCategory")
+    category = models.ManyToManyField("Category")
     header = models.CharField(
         max_length=124,
         default='Заголовок отсутвует'
@@ -48,9 +49,9 @@ class Post(models.Model):
         return f'/{self.id}' 
 
 
-class PostCategory(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+# class PostCategory(models.Model):
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+#     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):

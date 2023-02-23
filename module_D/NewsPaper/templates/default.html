@@ -32,7 +32,6 @@
         <ul class="navbar-nav ml-auto ">
           <li class="nav-item ml-auto ">
             <a class="nav-link" href="{% url 'news_list' %}">Последние новости</a>
-            
           </li>
           <li class="nav-item ml-auto ">
             <a class="nav-link" href="{% url 'search_news' %}">Поиск новостей</a>
@@ -57,7 +56,15 @@
             </li>
             {% endif %}
           </li>
-
+        </ul>
+      </div>
+      <div <div class="collapse navbar-collapse" id="navbarCategory">
+        <ul class="navbar-nav ml-auto ">
+          {% for category in categoryes %}
+            <li class="nav-item ">
+              <a class="nav-link" href="{% url 'news_category_list'%}?category={{category.id}}">{{category.name}}</a>
+            </li>
+          {% endfor %}
         </ul>
       </div>
     </div>

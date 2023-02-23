@@ -487,6 +487,15 @@ progress {
 [hidden] {
   display: none !important;
 }
+#navbarResponsive{
+  display: flex;
+  justify-content: center;
+}
+
+#navbarCategory {
+  display: flex;
+  justify-content: center; 
+}
 
 .lead {
   font-size: 1.25rem;
@@ -640,6 +649,7 @@ progress {
   margin-right: auto;
   margin-left: auto;
 }
+
 
 @media (min-width: 576px) {
   .container-sm, .container {
@@ -4049,7 +4059,7 @@ textarea.form-control-lg {
 .navbar > .container-xl,
 .navbar > .container-xxl {
   display: flex;
-  flex-wrap: inherit;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 }
